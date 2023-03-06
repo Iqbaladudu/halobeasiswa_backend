@@ -1,0 +1,8 @@
+PUT http://127.0.0.1:8000/api/profile/ HTTP/1.1
+Content-Type: application/json
+Authorization: token c13bcbd6ec53d72d5a9fb01402f8e09798c47214
+
+{
+    "whatsapp": "08136479181010",
+    "gender": "FEMALE"
+}
