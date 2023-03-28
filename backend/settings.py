@@ -29,7 +29,14 @@ SECRET_KEY = 'django-insecure-@%ue42z3(1i%_rgz@_+d9)#%h%z!d(6srfx_p!kn4ksgkh_r(8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+STATIC_ROOT = 'static/'
+
 ALLOWED_HOSTS = ["*"]
+
+USE_TZ = True
+TIME_ZONE = 'Asia/Jakarta'
+USE_L10N = True
+SHORT_DATETIME_FORMAT = 'm/dY P'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -54,6 +61,7 @@ INSTALLED_APPS = [
     'rest_registration',
     'coverage',
     'corsheaders',
+    'django_quill',
 ]
 
 MIDDLEWARE = [

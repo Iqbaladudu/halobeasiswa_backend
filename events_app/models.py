@@ -1,4 +1,5 @@
 from django.db import models
+from django_quill.fields import QuillField
 
 # Create your models here.
 
@@ -26,7 +27,7 @@ class Events(models.Model):
     date_closes = models.DateField()
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICE, default='OPEN')
-    description = models.TextField()
+    description = QuillField()
     registration_link = models.URLField()
     price = models.IntegerField()
     highlight = models.TextField(

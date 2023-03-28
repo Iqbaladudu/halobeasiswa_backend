@@ -13,6 +13,7 @@ pillow = "^9.4.0"
 django-rest-registration = "^0.7.3"
 coverage = "^7.0.5"
 django-cors-headers = "^3.13.0"
+django-quill-editor = "^0.1.40"
 
 
 [build-system]
