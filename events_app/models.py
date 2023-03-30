@@ -22,7 +22,8 @@ class Events(models.Model):
     name = models.CharField(max_length=100)
     picture = models.ImageField(
         upload_to=user_directory_path)
-    date = models.DateTimeField(null=True)
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
     date_open = models.DateField()
     date_closes = models.DateField()
     status = models.CharField(
