@@ -5,4 +5,7 @@ from ..models import Events
 
 class EventsList(generics.ListAPIView):
     serializer_class = EventSerializers
-    queryset = Events.objects.all()
+    queryset = Events
+
+    def get_queryset(self):
+        return self.queryset.objects.all()

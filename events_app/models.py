@@ -1,13 +1,11 @@
 from django.db import models
-from django_quill.fields import QuillField
+from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel, FieldRowPanel
 
 # Create your models here.
 
 
 class Events(models.Model):
-    def user_directory_path(instance, filename):
-        return f"img/admin/events/{instance.name}/{filename}"
-
     STATUS_CHOICE = (
         ("OPEN", "Open"),
         ("CLOSED", "Closed"),
@@ -20,23 +18,38 @@ class Events(models.Model):
     )
 
     name = models.CharField(max_length=100)
-    picture = models.ImageField(
-        upload_to=user_directory_path)
+    picture = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='img'
+    )
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
-    date_open = models.DateField()
-    date_closes = models.DateField()
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICE, default='OPEN')
-    description = QuillField()
+    description = RichTextField()
     registration_link = models.URLField()
     price = models.IntegerField()
-    highlight = models.TextField(
-        max_length=6, choices=HIGHLIGHT_CHOICE, default="FALSE")
+
+    panels = [
+        FieldPanel('name', heading="Nama Acara"),
+        FieldPanel('picture', heading="Gambar"),
+        FieldRowPanel([
+            FieldPanel('date', heading="Tanggal Acara"),
+            FieldPanel('time', heading="Waktu Acara"),
+        ]),
+        FieldPanel('description', heading="Deskripsi Acara"),
+        FieldPanel('price', heading="Biaya Acara",
+                   help_text="Masukkan 0 jika acaranya gratis"),
+        FieldPanel('registration_link', heading="Link Pendaftaran Acara"),
+        FieldPanel('status', heading="Status Acara"),
+    ]
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = "Event"
-        verbose_name_plural = "Events"
+        verbose_name = "Acara"
+        verbose_name_plural = "Event Halo Beasiswa"

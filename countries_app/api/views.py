@@ -1,8 +1,8 @@
 from rest_framework import generics
 from .serializers import CountriesSerializer
-from ..models import Countries
+from ..models import CountriesToStudy
 
 
 class CountriesList(generics.ListAPIView):
     serializer_class = CountriesSerializer
-    queryset = Countries.objects.all()
+    queryset = CountriesToStudy.objects.all()

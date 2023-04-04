@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from ..models import Countries
+from ..models import CountriesToStudy
 
 
 class CountriesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Countries
+        model = CountriesToStudy
         fields = '__all__'
