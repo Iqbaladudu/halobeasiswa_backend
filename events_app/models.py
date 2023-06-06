@@ -6,6 +6,9 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel
 
 
 class Events(models.Model):
+    def user_directory_path(instance, filename):
+        return f"img/admin/events/{instance.name}/{filename}"
+    
     STATUS_CHOICE = (
         ("OPEN", "Open"),
         ("CLOSED", "Closed"),
@@ -18,19 +21,15 @@ class Events(models.Model):
     )
 
     name = models.CharField(max_length=100)
-    picture = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='img'
-    )
+    picture = models.ImageField(
+        upload_to=user_directory_path)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICE, default='OPEN')
     description = RichTextField()
     registration_link = models.URLField()
+    instagram_feed_link = models.URLField(default="")
     price = models.IntegerField()
 
     panels = [
@@ -44,6 +43,7 @@ class Events(models.Model):
         FieldPanel('price', heading="Biaya Acara",
                    help_text="Masukkan 0 jika acaranya gratis"),
         FieldPanel('registration_link', heading="Link Pendaftaran Acara"),
+        FieldPanel('instagram_feed_link', heading="Link Feed Instagram"),
         FieldPanel('status', heading="Status Acara"),
     ]
 

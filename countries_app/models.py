@@ -7,6 +7,8 @@ import wagtail
 
 
 class CountriesToStudy(models.Model):
+    def user_directory_path(instance, filename):
+        return f"img/admin/countries/{instance.name}/{filename}"
     STATUS_CHOICE = (
         ("OPEN", "Open"),
         ("CLOSED", "Closed"),
@@ -19,13 +21,8 @@ class CountriesToStudy(models.Model):
     )
 
     name = models.CharField(max_length=100)
-    picture = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
+    picture = models.ImageField(
+        upload_to=user_directory_path)
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICE, default='OPEN')
     description = RichTextField()
