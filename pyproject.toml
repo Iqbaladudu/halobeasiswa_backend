@@ -16,6 +16,8 @@ django-cors-headers = "^3.13.0"
 django-quill-editor = "^0.1.40"
 wagtail = "^4.2.1"
 psycopg2 = "^2.9.6"
+django-environ = "^0.10.0"
+whitenoise = "^6.4.0"
 
 
 [build-system]
